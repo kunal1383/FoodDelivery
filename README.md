@@ -14,7 +14,7 @@ To get started with the project, follow the steps below:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/kunalb1383/FoodDelivery.git
+   git clone https://github.com/kunal1383/FoodDelivery.git
    ```
 
 2. Create a new virtual environment for the project:
