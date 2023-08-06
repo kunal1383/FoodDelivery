@@ -11,8 +11,8 @@ from src.logger import logging
 import datetime
 
 
-MONGO_USERNAME='kunalb1383'
-MONGO_PASSWORD='kunalb1383'
+MONGO_USERNAME=''
+MONGO_PASSWORD=''
 MONGO_DB='FoodDelivery'
 COLLECTION_NAME='ProcessedData'
 
