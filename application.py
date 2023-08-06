@@ -9,8 +9,6 @@ from src.logger import logging
 from src.exception import CustomException 
 
 
-
-
 application = Flask(__name__)
 app = application
 
