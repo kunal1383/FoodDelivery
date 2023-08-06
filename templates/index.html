@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Delivery Time Prediction</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-A4g4S3qQaIIVU8jnn5sXvMO5K7XdBhAO4+Utx2nOxzMIT8vzbET8XT7kK0jKZfpC" crossorigin="anonymous">
+
+    <!-- Add custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .card {
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            text-align: center; 
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card mx-auto">
+            <div class="card-header text-center">
+                <h3>Food Delivery Time Prediction</h3>
+            </div>
+            <div class="card-body">
+                <form action="{{url_for('prediction')}}" method="POST">
+
+                    <div class="form-group">
+                        <label for="Delivery_person_age">Delivery Person Age:</label>
+                        <input type="text" id="Delivery_person_age" name="Delivery_person_age" placeholder="Enter the age (float)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Delivery_person_Ratings">Delivery Person Ratings:</label>
+                        <input type="text" id="Delivery_person_Ratings" name="Delivery_person_Ratings" placeholder="Enter the rating (float)">
+                    </div>
+
+                    <!-- Restaurant Latitude -->
+                    <div class="form-group">
+                        <label for="Restaurant_latitude" class="form-label">Restaurant Latitude:</label>
+                        <input type="text" class="form-control" id="Restaurant_latitude" name="Restaurant_latitude" placeholder="Enter the Restaurant latitude (float)">
+                    </div>
+                    
+                    <!-- Restaurant Longitude -->
+                    <div class="form-group">
+                        <label for="Restaurant_longitude" class="form-label">Restaurant Longitude:</label>
+                        <input type="text" class="form-control" id="Restaurant_longitude" name="Restaurant_longitude" placeholder="Enter the Restaurant longitude (float)">
+                    </div>
+
+                    <!-- Delivery Location Latitude -->
+                    <div class="form-group">
+                        <label for="Delivery_location_latitude" class="form-label">Delivery Location Latitude:</label>
+                        <input type="text" class="form-control" id="Delivery_location_latitude" name="Delivery_location_latitude" placeholder="Enter the Delivery location latitude (float)">
+                    </div>
+
+                    <!-- Delivery Location Longitude -->
+                    <div class="form-group">
+                        <label for="Delivery_location_longitude" class="form-label">Delivery Location Longitude:</label>
+                        <input type="text" class="form-control" id="Delivery_location_longitude" name="Delivery_location_longitude" placeholder="Enter the Delivery location longitude (float)">
+                    </div>
+
+                    <!-- Weather Conditions -->
+                    <div class="form-group">
+                        <label for="Weather_conditions" class="form-label">Weather Conditions:</label>
+                        <select class="form-select" id="Weather_conditions" name="Weather_conditions">
+                            <option value="Fog">Fog</option>
+                            <option value="Stormy">Stormy</option>
+                            <option value="Sandstorms">Sandstorms</option>
+                            <option value="Windy">Windy</option>
+                            <option value="Cloudy">Cloudy</option>
+                            <option value="Sunny">Sunny</option>
+                        </select>
+                    </div>
+
+                    <!-- Road Traffic Density -->
+                    <div class="form-group">
+                        <label for="Road_traffic_density" class="form-label">Road Traffic Density:</label>
+                        <select class="form-select" id="Road_traffic_density" name="Road_traffic_density">
+                            <option value="Jam">Jam</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+
+                    <!-- Vehicle Condition -->
+                    <div class="form-group">
+                        <label for="Vehicle_condition"class="form-label">Vehicle_condition:</label>
+                        <select class="form-select" id="Vehicle_condition" name="Vehicle_condition">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <!-- Type of Vehicle  -->
+                    <div class="form-group">
+                        <label for="Type_of_vehicle" class="form-label">Type_of_vehicle:</label>
+                        <select class="form-select" id="Type_of_vehicle" name="Type_of_vehicle">
+                        <option value="bicycle">bicycle</option>
+                        <option value="electric_scooter">electric_scooter</option>
+                        <option value="scooter">scooter</option>
+                        <option value="motorcycle">motorcycle</option>
+                        </select>
+                    </div>
+
+                    <!-- Multiple deliveries -->
+                    <div class="form-group">
+                        <label for="multiple_deliveries" class="form-label">multiple_deliveries:</label>
+                        <select class="form-select" id="multiple_deliveries" name="multiple_deliveries">
+                          <option value="0">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                        </select>
+                      </div>
+                    <!-- Festival -->
+                    <div class="form-group">
+                        <label for="Festival" class="form-label">Festival:</label>
+                        <select class="form-select" id="Festival" name="Festival">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        </div>
+
+                    
+
+                    <!-- City -->
+                    <div class="form-group">
+                        <label for="City" class="form-label">City:</label>
+                        <select class="form-select" id="City" name="City">
+                            <option value="Metropolitan">Metropolitan</option>
+                            <option value="Urban">Urban</option>
+                            <option value="Semi-Urban">Semi-Urban</option>
+                        </select>
+                    </div>
+
+                    <!-- order date -->
+                    <div class="form-group">
+                        <label for="Order_Date" class="form-label">Order Date:</label>
+                        <input type="text" class="form-control" id="Order_Date" name="Order_Date" placeholder="Enter the Order Date (DD-MM-YYYY)">
+                    </div>
+                    
+                    <!-- order time -->
+                    <div class="form-group">
+                        <label for="Time_Ordered" class="form-label">Time Ordered:</label>
+                        <input type="text" class="form-control" id="Time_Ordered" name="Time_Ordered" placeholder="Enter the Time Ordered (HH:mm)">
+                    </div>
+                    
+                    <!-- order picked time -->
+                    <div class="form-group">
+                        <label for="Time_Order_picked" class="form-label">Time Order Picked:</label>
+                        <input type="text" class="form-control" id="Time_Order_picked" name="Time_Order_picked" placeholder="Enter the Time Order Picked (HH:mm)">
+                    </div>
+                    
+
+
+                    <div style="clear:both;"></div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adding Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-S5RD4HjPnZ2MUiUrGJ3m9PExlE6lK9QfJUfuTcHGIVm2N4Uv9bDU3zjIeCAwQTgj" crossorigin="anonymous"></script>
+</body>
+</html>
