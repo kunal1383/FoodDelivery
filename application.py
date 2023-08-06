@@ -1,12 +1,13 @@
+import pandas as pd 
+import os
+import sys
 from flask import Flask, request, render_template
 from src.pipeline.prediction_pipeline import PredictionPipeline
 from src.pipeline.training_pipeline import TrainingPipeline
 from src.utils import parse_date, parse_time
 from src.logger import logging
-import os
-import sys
 from src.exception import CustomException 
-import pandas as pd 
+
 
 
 
